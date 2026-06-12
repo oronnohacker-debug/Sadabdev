@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Simple Café | Premium Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- DESIGN STYLE: COLORS & FONTS --- */
+        :root {
+            --brown-dark: #4A2C11;
+            --brown-light: #784315;
+            --cream: #FFFDD0;
+            --cream-dark: #F5E6CA;
+            --green: #2E5A44;
+            --green-light: #4682B4;
+            --text-dark: #221201;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- NAVIGATION MENU --- */
+        header {
+            background-color: var(--brown-dark);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: fadeInDown 1s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+        }
+
+        .logo {
+            color: var(--cream);
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--green); }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li { margin-left: 30px; }
+
+        .nav-links a {
+            color: var(--cream-dark);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--white);
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 5px;
+        }
+
+        /* --- SECTION GENERAL STYLES --- */
+        section {
+            padding: 100px 8% 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--brown-dark);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--green);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* --- 1. HOME PAGE --- */
+        #home {
+            background: linear-gradient(rgba(74, 44, 17, 0.8), rgba(34, 18, 1, 0.9)), url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1600') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 35px;
+            color: var(--cream-dark);
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--green);
+            color: var(--white);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.4s ease;
+            box-shadow: 0 4px 15px rgba(46, 90, 68, 0.4);
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--brown-light);
+            transform: translateY(-3px);
+        }
+
+        /* --- 2. ABOUT PAGE --- */
+        #about { background-color: var(--cream-dark); }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text { flex: 1; }
+        .about-text h3 { font-size: 26px; color: var(--brown-dark); margin-bottom: 15px; }
+        .about-text p { font-size: 16px; line-height: 1.6; margin-bottom: 20px; }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .about-img img { width: 100%; display: block; }
+
+        /* --- 3. MENU PAGE --- */
+        #menu { background-color: var(--cream); }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+            color: var(--brown-light);
+            border-bottom: 3px solid transparent;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            color: var(--green);
+            border-bottom: 3px solid var(--green);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.4s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        .menu-item img { width: 100%; height: 200px; object-fit: cover; }
+        
+        .menu-info { padding: 20px; }
+        .menu-info h4 { font-size: 20px; color: var(--brown-dark); margin-bottom: 8px; }
+        .menu-info p { font-size: 14px; color: #666; margin-bottom: 15px; }
+        .menu-price { font-weight: 700; color: var(--green); font-size: 18px; }
+
+        /* --- 4. CONTACT PAGE --- */
+        #contact { background-color: var(--cream-dark); }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info { flex: 1; }
+        .info-box { display: flex; align-items: center; margin-bottom: 30px; }
+        .info-box i { font-size: 24px; color: var(--green); margin-right: 20px; }
+        .info-box h4 { font-size: 18px; color: var(--brown-dark); }
+        .info-box p { color: #555; }
+
+        .contact-form {
+            flex: 1;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--green);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--brown-dark);
+            color: var(--cream-dark);
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .social-links { margin-bottom: 20px; }
+        .social-links a {
+            color: var(--cream-dark);
+            font-size: 22px;
+            margin: 0 12px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover { color: var(--green); }
+
+        /* --- MOBILE FRIENDLY RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 5%; }
+            .nav-links { display: none; } /* Basic hidden state for simple responsive layout */
+            .hero-content h1 { font-size: 38px; }
+            .about-container, .contact-container { flex-direction: column; }
+            section { padding: 80px 5% 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="#home" class="logo">Café<span>Simple.</span></a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero-content">
+            <h1>Welcome to Café Simple</h1>
+            <p>Where good coffee meets fresh minds. Perfectly roasted, daily brewed.</p>
+            <a href="#menu" class="btn">Explore Our Menu</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About Our Café</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <h3>Our Story</h3>
+                <p>Founded with a passion for premium beans and welcoming spaces, Café Simple has been serving students, remote workers, and families since day one.</p>
+                <h3>What We Believe In</h3>
+                <p>We believe in high-quality ingredients, community bonding, and providing a quiet, energetic environment for everyone to learn, work, and relax.</p>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=600" alt="About Cafe">
+            </div>
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2 class="section-title">Our Special Menu</h2>
+        
+        <div class="menu-tabs">
+            <button class="tab-btn active">All Offerings</button>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=500" alt="Breakfast">
+                <div class="menu-info">
+                    <h4>Classic Morning Croissant</h4>
+                    <p>Freshly baked buttery croissant served with organic honey.</p>
+                    <span class="menu-price">$4.50</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=500" alt="Lunch">
+                <div class="menu-info">
+                    <h4>Healthy Avocado Salad</h4>
+                    <p>Fresh greens, avocado slices, and tomatoes with olive oil dressing.</p>
+                    <span class="menu-price">$9.00</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=500" alt="Drink">
+                <div class="menu-info">
+                    <h4>Premium Hot Latte</h4>
+                    <p>Double shot espresso mixed with perfectly steamed milk foam.</p>
+                    <span class="menu-price">$3.80</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Find & Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Café Address</h4>
+                        <p>123 Coffee Street, Downtown, USA</p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Phone Number</h4>
+                        <p>+1 (555) 019-2834</p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email Us</h4>
+                        <p>hello@cafesimple.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Your Message Here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="border:none; width:100%; cursor:pointer;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2026 Café Simple. Designed with passion by Oronno.</p>
+    </footer>
+
+    <script>
+        // Smooth Active Navigation Tracking
+        const sections = document.querySelectorAll('section');
+        const navLi = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
